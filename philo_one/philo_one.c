@@ -6,13 +6,13 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:45 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/01/10 13:54:51 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/05 09:57:24 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int check_input(int argc, char **argv, t_data *data)
+int check_input(int argc, char **argv, t_main *data)
 {
 	int i;
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 {
 	int i;
 	int j;
-	t_data data;
+	t_main data;
 
 	if (argc < 5 || argc > 6)
 		return (print_error(1));
@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 		return (0);
 	if (preparation(data) == 1)
 		return (print_error(2));
+	check_struct();
 	start_simulation(data);
 	return (0);
 }

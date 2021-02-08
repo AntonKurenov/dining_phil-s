@@ -6,11 +6,19 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:41 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/01/10 12:21:44 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/05 15:42:09 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+size_t		ft_gettime(void)
+{
+	t_time tm;
+
+	gettimeofday(&tm, NULL);
+	return((size_t)tm.tv_sec * 1000 + (size_t)tm.tv_usec / 1000);
+}
 
 int ft_strlen(char *str)
 {
@@ -20,6 +28,11 @@ int ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return(i);
+}
+
+void ft_error(char *str)
+{
+	write(1, str, ft_strlen(str));
 }
 
 int print_error(int error)
