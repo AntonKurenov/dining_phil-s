@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/08 19:23:26 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/09 13:44:46 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void take_forks(t_phil *phil)
 {
 	printf("Hello there\n");
-	
+
 }
 
-void simulation(void *data)
+void *simulation(void *data)
 {
 	t_phil *phil;
 	int i;

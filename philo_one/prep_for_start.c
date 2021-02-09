@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/08 20:04:53 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/09 12:10:59 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void give_forks(t_phil *phil, int i)
 	{
 		phil->left_fork = i;
 		if (i == 1)
-			phil->right_fork = phil->data.ph_num;
+			phil->right_fork = phil->data->ph_num;
 		else
 			phil->right_fork = i - 1;
 	}
@@ -65,5 +65,6 @@ int preparation(t_main *data)
 		if (init_arr_phil(data, i))
 			return (1);
 	}
+	return (0);
 
 }

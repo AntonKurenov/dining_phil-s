@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/08 20:02:21 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/09 13:45:47 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ struct s_main;
 
 typedef struct s_phil
 {
-	struct t_main	*data;
+	struct s_main	*data;
 	long int	start_life;
 	long int 	time_death;
 	long int	start_time;
@@ -54,7 +54,8 @@ typedef struct s_main
 	t_phil		**arr_phil;
 }				t_main;
 
-
+void			*simulation(void *data);
+int				preparation(t_main *data);
 void			ft_error(char *str);
 int				ft_atoi(char *str);
 int				print_error(int error);
