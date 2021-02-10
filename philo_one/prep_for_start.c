@@ -6,59 +6,49 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/09 12:10:59 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:43:42 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void give_forks(t_phil *phil, int i)
+void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
-	int num;
-
-	if (i % 2 == 1)
+	phil->data = data;
+	phil->print = data->print;
+	phil->num = i;
+	if (i == data->ph_num)
 	{
-		phil->left_fork = i;
-		if (i == 1)
-			phil->right_fork = phil->data->ph_num;
-		else
-			phil->right_fork = i - 1;
+		phil->left_fork = data->forks + data->ph_num;
+		phil->right_fork = data->forks;
 	}
 	else
 	{
-		phil->left_fork = i;
-		phil->right_fork = i - 1;
+		phil->left_fork = data->forks + i;
+		phil->right_fork = data->forks + i + 1;
 	}
-}
-
-int init_arr_phil(t_main *data, int i)
-{
-	if (!(data->arr_phil[i] = (t_phil *)malloc(sizeof(t_phil))))
-	{
-		ft_error("Sorry, memory allocation error(\n");
-		return (1);
-	}
-	data->arr_phil[i]->ph_num = i;
-	data->arr_phil[i]->data = data;
-	data->arr_phil[i]->eat_count = data->eat_count;
-	// data->arr_phil[i]->
-	give_forks(data->arr_phil[i], i + 1);
-	if (pthread_mutex_init(&data->forks[i], NULL))
-	{
-		ft_error("Can't initialize mutex\n");
-		return(1);
-	}
-	return (0);
+	if (pthread_mutex_init(phil->left_fork, NULL) || pthread_mutex_init(phil-> \
+		right_fork, NULL))
+		ft_error("Failed to initialize mutex\n");
 }
 
 int preparation(t_main *data)
 {
 	int i;
 
-	// memory allocation block
+	i = -1;
+	if (!(data->arr_phil = (t_phil *)malloc(sizeof(t_phil) * data->ph_num)))
+		ft_error("Sorry, memory allocation error((\n");
+	if (!(data->forks = (mutex_t *)malloc(sizeof(mutex_t) * data->ph_num)))
+		ft_error("Sorry, memory allocation error((\n");
+	if (!(data->print = (mutex_t *)malloc(sizeof(mutex_t))))
+		ft_error("Sorry, memory allocation error((\n");
+	while (++i < data->ph_num)
+	{
+		fill_each_phil(data, &data->arr_phil[i], i);
+	}
+	printf("ph_num = %d\n", data->ph_num);
 	data->phil_thr = (pthread_t *)malloc(sizeof(pthread_t) * data->ph_num);
-	data->arr_phil = (t_phil **)malloc(sizeof(t_phil *) * data->ph_num);
-	data->forks = (mutex_t *)malloc(sizeof(mutex_t) * data->ph_num);
 	i = -1;
 	while (++i < data->ph_num)
 	{
@@ -66,5 +56,4 @@ int preparation(t_main *data)
 			return (1);
 	}
 	return (0);
-
 }

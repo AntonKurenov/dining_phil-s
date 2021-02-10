@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:41 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/05 15:42:09 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/10 16:43:03 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@ size_t		ft_gettime(void)
 
 	gettimeofday(&tm, NULL);
 	return((size_t)tm.tv_sec * 1000 + (size_t)tm.tv_usec / 1000);
+}
+
+void	ft_sleep(int time)
+{
+	size_t start;
+	size_t now_time;
+
+	start = ft_gettime();
+	while (1)
+	{
+		now_time = ft_gettime();
+		if (now_time - start >= time)
+			break ;
+		usleep(100);
+	}
 }
 
 int ft_strlen(char *str)
@@ -33,6 +48,7 @@ int ft_strlen(char *str)
 void ft_error(char *str)
 {
 	write(1, str, ft_strlen(str));
+	exit(EXIT_FAILURE);
 }
 
 int print_error(int error)

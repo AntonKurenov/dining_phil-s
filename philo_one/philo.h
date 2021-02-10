@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/09 13:45:47 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/10 17:21:24 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ typedef struct s_phil
 	long int	start_life;
 	long int 	time_death;
 	long int	start_time;
-	int		left_fork;
-	int		right_fork;
-	int		last_eat;
-	int 	ph_num;
-	int 	tt_die;
-	int 	tt_eat;
-	int 	tt_sleep;
-	int 	eat_count;
+	mutex_t		*left_fork;
+	mutex_t		*right_fork;
+	mutex_t		*print;
+	int			last_eat;
+	int 		ph_num;
+	int			num;
+	int 		tt_die;
+	int 		tt_eat;
+	int 		tt_sleep;
+	int 		eat_count;
 }			t_phil;
 
 typedef struct s_main
@@ -51,14 +53,17 @@ typedef struct s_main
 	int			eat_count;
 	pthread_t	*phil_thr;
 	mutex_t		*forks;
-	t_phil		**arr_phil;
+	mutex_t		*print;
+	t_phil		*arr_phil;
 }				t_main;
 
+void			ft_sleep(int time);
 void			*simulation(void *data);
 int				preparation(t_main *data);
 void			ft_error(char *str);
 int				ft_atoi(char *str);
 int				print_error(int error);
 size_t			ft_gettime(void);
+int				start(t_main *data);
 
 #endif
