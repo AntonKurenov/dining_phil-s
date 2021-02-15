@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:45 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/10 11:11:56 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 12:26:42 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ int main(int argc, char **argv)
 		return (print_error(1));
 	else if (check_input(argc, argv, &data) == 1)
 		return (0);
-	if (preparation(&data) == 1)
-		return (print_error(2));
-	start(&data);
+	preparation(&data);
+	start_threads(&data);
 	// check_struct();
 	// start_simulation(data);
+	// usleep(100);
+	sleep(5);
 	return (0);
 }

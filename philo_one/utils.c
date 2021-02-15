@@ -6,11 +6,15 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:41 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/10 16:43:03 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 12:13:16 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+// void ft_stop(void)
+// {
+
 
 size_t		ft_gettime(void)
 {

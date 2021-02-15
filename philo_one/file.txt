@@ -1,0 +1,70 @@
+i = 0
+i = 1
+i = 2
+ph_num = 3
+i = 0
+i = 1
+i = 2
+time is = 1613380987472
+phil_num = 0
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+time is = 1613380987472
+phil_num = 1
+Hello there
+inside take forks num = 1
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 1 has taken a fork
+|||||||||
+time is = 1613380987472
+phil_num = 2
+Hello there
+inside take forks num = 2
+0 1 has taken a fork
+0 1 is eating
+0 0 died
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 0 is sleeping
+0 0 is thinking
+Hello there
+inside take forks num = 0
+0 0 has taken a fork
+0 0 has taken a fork
+0 0 is eating
+0 2 has taken a fork
