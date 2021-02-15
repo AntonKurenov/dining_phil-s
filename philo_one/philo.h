@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 12:07:47 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 16:14:12 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_main
 	mutex_t		*forks;
 	mutex_t		*print;
 	t_phil		*arr_phil;
+	int			someone_died;
 }				t_main;
 
 void			ft_sleep(int time);

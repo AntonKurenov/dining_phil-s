@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:45 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 12:26:42 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 14:32:13 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int check_input(int argc, char **argv, t_main *data)
 {
 	int i;
 
+	data->eat_count = (argc == 5) ? -1 : ft_atoi(argv[6]);
 	if ((data->ph_num = ft_atoi(argv[1])) == -1)
 		return (print_error(1));
 	if ((data->tt_die = ft_atoi(argv[2])) == -1)

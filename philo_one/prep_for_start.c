@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/11 11:33:54 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 14:33:43 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	fill_each_phil(t_main *data, t_phil *phil, int i)
 	phil->data = data;
 	phil->print = data->print;
 	phil->num = i;
+	phil->eat_count = data->eat_count;
 	printf("i = %d\n", phil->num);
 	if (i == data->ph_num)
 	{

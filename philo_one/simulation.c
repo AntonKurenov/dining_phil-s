@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 12:03:16 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/15 17:02:02 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	print_state(int type, t_phil *phil)
 {
+	long int now = ft_gettime();
+
 	pthread_mutex_lock(phil->print);
+	printf("start_time = %zu now = %zu\n", phil->start_time, now);
 	if (type == 1)
 		printf("%zu %d has taken a fork\n", ft_gettime() - phil->start_time, phil->num);
 	if (type == 2)
@@ -56,23 +59,28 @@ void *simulation(void *data)
 
 	phil = (t_phil*)data;
 	phil->start_time = ft_gettime();
+	// printf("start_time = %ld\n", phil->start_time);
 	// phil->start_life = ft_gettime();
 	printf("time is = %zu\n", phil->start_time);
 	printf("phil_num = %d\n", phil->num);
+	phil->last_eat = phil->start_time;
 	// sleep(1);
 	// printf("time is = %zu\n", phil->start_time);
-	while (1)
+	// while (1)
+	while (phil->data->someone_died != 1)
 	{
-		phil->last_eat = ft_gettime();
 		take_forks(phil);
 		print_state(2, phil);
-		ft_sleep(phil->tt_eat);
 		phil->last_eat = ft_gettime();
+		ft_sleep(phil->tt_eat);
+		// if (phil->eat_count != -1)
+		// 	phil->eat_count--;
+		// if (phil->eat_count == 0)
+		// 	break ;
 		pthread_mutex_unlock(phil->right_fork);
 		pthread_mutex_unlock(phil->left_fork);
 		print_state(3, phil);
 		ft_sleep(phil->tt_sleep);
 		print_state(4, phil);
 	}
-	sleep(1);
 }
