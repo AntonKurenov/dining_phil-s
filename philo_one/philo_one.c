@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:45 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 14:32:13 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:45:18 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int check_input(int argc, char **argv, t_main *data)
 {
 	int i;
 
-	data->eat_count = (argc == 5) ? -1 : ft_atoi(argv[6]);
+	data->eat_count = (argc == 5) ? -1 : ft_atoi(argv[5]);
 	if ((data->ph_num = ft_atoi(argv[1])) == -1)
 		return (print_error(1));
 	if ((data->tt_die = ft_atoi(argv[2])) == -1)
@@ -25,11 +25,6 @@ int check_input(int argc, char **argv, t_main *data)
 		return (print_error(1));
 	if ((data->tt_sleep = ft_atoi(argv[4])) == -1)
 		return (print_error(1));
-	if (argc == 6)
-	{
-		if ((data->eat_count = ft_atoi(argv[5])) == -1)
-			return (print_error(1));
-	}
 	return (0);
 }
 
@@ -48,6 +43,6 @@ int main(int argc, char **argv)
 	// check_struct();
 	// start_simulation(data);
 	// usleep(100);
-	sleep(5);
+	// sleep(5);
 	return (0);
 }

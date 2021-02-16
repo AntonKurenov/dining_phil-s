@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 16:14:12 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/16 10:29:27 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ struct s_main;
 typedef struct s_phil
 {
 	struct s_main	*data;
-	long int	start_life;
-	long int 	time_death;
-	long int	start_time;
-	long int	last_eat;
-	long int	time_diff;
-	long int	time_of_death;
+	size_t	start_life;
+	size_t 	time_death;
+	size_t	start_time;
+	size_t	last_eat;
+	size_t	time_diff;
+	size_t	time_of_death;
 	int			is_dead;
 	mutex_t		*left_fork;
 	mutex_t		*right_fork;
