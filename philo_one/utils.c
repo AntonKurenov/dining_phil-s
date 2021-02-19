@@ -6,15 +6,11 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:41 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/15 16:51:03 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/17 16:54:14 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-// void ft_stop(void)
-// {
-
+#include "philo_one.h"
 
 size_t		ft_gettime(void)
 {
@@ -24,7 +20,7 @@ size_t		ft_gettime(void)
 	return((size_t)tm.tv_sec * 1000 + (size_t)tm.tv_usec / 1000);
 }
 
-void	ft_sleep(int time)
+void	ft_sleep(size_t time)
 {
 	size_t start;
 	size_t now_time;
@@ -39,30 +35,10 @@ void	ft_sleep(int time)
 	}
 }
 
-int ft_strlen(char *str)
+void print_error(char *str)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return(i);
-}
-
-void ft_error(char *str)
-{
-	write(1, str, ft_strlen(str));
+	printf("%s\n", str);
 	exit(EXIT_FAILURE);
-}
-
-int print_error(int error)
-{
-	if (error == 1)
-	{
-		write(1, "Invalid input\n", ft_strlen("Invalid input\n"));
-		return (1);
-	}
-	return (0);
 }
 
 int			ft_atoi(char *str)

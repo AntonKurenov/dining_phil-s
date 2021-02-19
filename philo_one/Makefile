@@ -5,11 +5,11 @@ RED = \x1b[31;01m
 
 NAME = philo_one
 OBJS = $(SRCS:.c=.o)
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = philo_one.c \
 		simulation.c utils.c \
-		prep_for_start.c start_threads.c \
+		initialization.c start_threads.c \
 
 all: $(NAME)
 
