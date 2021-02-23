@@ -6,15 +6,15 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/17 13:3 by1 elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:34:31 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-void	print_state(int type, t_phil *phil)
+void		print_state(int type, t_phil *phil)
 {
-	size_t now;
+	size_t	now;
 
 	now = ft_gettime();
 	if (*phil->someone_died)
@@ -31,7 +31,7 @@ void	print_state(int type, t_phil *phil)
 	sem_post(phil->print);
 }
 
-void waiter(t_phil *phil)
+void		waiter(t_phil *phil)
 {
 	if (*phil->someone_died)
 		return ;
@@ -47,27 +47,23 @@ void waiter(t_phil *phil)
 	print_state(1, phil);
 	sem_post(phil->waiter);
 	print_state(2, phil);
-	ft_sleep(phil->tt_eat);
 	phil->last_eat = ft_gettime();
+	ft_sleep(phil->tt_eat);
 	sem_post(phil->forks);
 	sem_post(phil->forks);
 }
 
-void *simulation(void *data)
+void		*simulation(void *data)
 {
-	t_phil *phil;
+	t_phil	*phil;
 
 	phil = (t_phil*)data;
 	phil->start_time = ft_gettime();
 	phil->last_eat = phil->start_time;
-	while (1)
+	while (phil->eat_count != 0)
 	{
 		if (*phil->someone_died)
 			break ;
-		if (phil->eat_count == 0)
-			break ;
-		if (phil->eat_count != -1)
-			phil->eat_count--;
 		waiter(phil);
 		if (*phil->someone_died)
 			break ;
@@ -76,6 +72,11 @@ void *simulation(void *data)
 			break ;
 		ft_sleep(phil->tt_sleep);
 		print_state(4, phil);
+		if (phil->eat_count != -1)
+			phil->eat_count--;
+		if (phil->eat_count == 0)
+			break ;
 	}
+	*phil->finished += 1;
 	return (0);
 }

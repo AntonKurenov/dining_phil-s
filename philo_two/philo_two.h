@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_two.h                                            :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/17 16:23:43 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:02:45 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_TWO_H
-#define PHILO_TWO_H
+# define PHILO_TWO_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/time.h>
-#include <semaphore.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
+# include <semaphore.h>
 
-typedef struct timeval t_time;
+typedef struct timeval	t_time;
 
 typedef struct	s_phil
 {
@@ -30,21 +30,23 @@ typedef struct	s_phil
 	sem_t		*forks;
 	sem_t		*print;
 	int			num;
-	size_t 		tt_die;
-	size_t 		tt_eat;
-	size_t 		tt_sleep;
-	int 		eat_count;
+	size_t		tt_die;
+	size_t		tt_eat;
+	size_t		tt_sleep;
+	int			eat_count;
 	int			*someone_died;
+	int			*finished;
 	int			ph_num;
-}			t_phil;
+}				t_phil;
 
-typedef struct s_main
+typedef struct	s_main
 {
 	int			ph_num;
 	size_t		tt_die;
 	size_t		tt_eat;
 	size_t		tt_sleep;
 	int			eat_count;
+	int			finished;
 	pthread_t	*observer;
 	pthread_t	*phil_thr;
 	sem_t		*forks;

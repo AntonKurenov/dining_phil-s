@@ -1,6 +1,6 @@
 NAME = philo_three
 OBJS = $(SRCS:.c=.o)
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = philo_three.c \
 		simulation.c utils.c \
@@ -9,8 +9,7 @@ SRCS = philo_three.c \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc -o $(NAME) -pthread $(OBJS)
-	# gcc $(CFLAGS) -o $(NAME) $(OBJS)
+	gcc $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

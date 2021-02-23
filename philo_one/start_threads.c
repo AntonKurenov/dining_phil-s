@@ -6,13 +6,13 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:36:58 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/16 10:33:1 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:32:49 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	*print_dead(t_main *data, size_t now, int i)
+void		*print_dead(t_main *data, size_t now, int i)
 {
 	data->someone_died = 1;
 	pthread_mutex_lock(data->print);
@@ -21,12 +21,12 @@ void	*print_dead(t_main *data, size_t now, int i)
 	return (0);
 }
 
-void *observation(void *info)
+void		*observation(void *info)
 {
-	t_main *data;
-	int i;
-	size_t now;
-	int flag;
+	t_main	*data;
+	size_t	now;
+	int		i;
+	int		flag;
 
 	data = (t_main*)info;
 	while (1)
@@ -39,7 +39,7 @@ void *observation(void *info)
 			if (data->arr_phil[i].eat_count == 0)
 				flag++;
 			if (flag == data->ph_num)
-				return 0;
+				return (0);
 			else if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
 				arr_phil[i].eat_count != 0)
 				return (print_dead(data, now, i));
@@ -48,9 +48,9 @@ void *observation(void *info)
 	}
 }
 
-int start_threads(t_main *data)
+int			start_threads(t_main *data)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	data->someone_died = 0;
@@ -62,11 +62,12 @@ int start_threads(t_main *data)
 	}
 	ft_sleep(50);
 	if (pthread_create(data->observer, NULL, observation, (void*)data))
-			print_error("Failed to create thread!");
+		print_error("Failed to create thread!");
 	i = 0;
 	while (++i <= data->ph_num)
 	{
 		pthread_join(data->phil_thr[i], NULL);
-	} 
-	pthread_join(data->observer[0], NULL); return (0);
+	}
+	pthread_join(data->observer[0], NULL);
+	return (0);
 }

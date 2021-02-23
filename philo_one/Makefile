@@ -14,8 +14,7 @@ SRCS = philo_one.c \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc -o $(NAME) -pthread $(OBJS)
-	# gcc $(CFLAGS) -o $(NAME) $(OBJS)
+	gcc $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

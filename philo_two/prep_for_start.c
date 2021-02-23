@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/20 16:44:42 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:38:38 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
 	phil->someone_died = &data->someone_died;
+	phil->finished = &data->finished;
 	phil->forks = data->forks;
 	phil->waiter = data->waiter;
 	phil->print = data->print;
@@ -26,18 +27,14 @@ void	fill_each_phil(t_main *data, t_phil *phil, int i)
 	phil->ph_num = data->ph_num;
 }
 
-int preparation(t_main *data)
+int		preparation(t_main *data)
 {
-	int i;
-	int ph_count;
+	int	i;
+	int	ph_count;
 
 	i = -1;
 	ph_count = data->ph_num;
 	if (!(data->arr_phil = (t_phil *)malloc(sizeof(t_phil) * (ph_count))))
-		print_error("Sorry, memory allocation error((");
-	if (!(data->forks = (sem_t *)malloc(sizeof(sem_t))))
-		print_error("Sorry, memory allocation error((");
-	if (!(data->print = (sem_t *)malloc(sizeof(sem_t))))
 		print_error("Sorry, memory allocation error((");
 	if (!(data->forks = sem_open("forks", O_CREAT | O_EXCL, S_IRWXU, ph_count)))
 		print_error("Error, sem_open function failed((");

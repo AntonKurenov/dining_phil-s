@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/22 16:30:18 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:35:08 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int			preparation(t_main *data)
 {
 	int		i;
 	int		ph_count;
-	int		status;
-	int		finished;
 
 	i = -1;
 	ph_count = data->ph_num;

@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:41 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/19 10:14:59 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 16:27:20 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 size_t		ft_gettime(void)
 {
-	t_time tm;
+	t_time	tm;
 
 	gettimeofday(&tm, NULL);
-	return((size_t)tm.tv_sec * 1000 + (size_t)tm.tv_usec / 1000);
+	return ((size_t)tm.tv_sec * 1000 + (size_t)tm.tv_usec / 1000);
 }
 
-void	ft_sleep(size_t time)
+void		ft_sleep(size_t time)
 {
-	size_t start;
-	size_t now_time;
+	size_t	start;
+	size_t	now_time;
 
 	start = ft_gettime();
 	while (1)
@@ -35,7 +35,7 @@ void	ft_sleep(size_t time)
 	}
 }
 
-void print_error(char *str)
+void		print_error(char *str)
 {
 	printf("%s\n", str);
 	exit(EXIT_FAILURE);
@@ -43,12 +43,12 @@ void print_error(char *str)
 
 int			ft_atoi(char *str)
 {
-	unsigned int	ret;
-	int i;
+	int		ret;
+	int		i;
 
 	ret = 0;
 	i = 0;
-	if (str[i] == '-' || str[i] == '+' || str[i] <= '0' || str[i] > '9')
+	if (str[i] == '-' || str[i] == '+' || str[i] < '0' || str[i] > '9')
 		return (-1);
 	while (str[i] >= '0' && str[i] <= '9' && str[i])
 	{

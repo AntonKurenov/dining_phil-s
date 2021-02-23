@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/22 16:28:45 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:34:17 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void			waiter(t_phil *phil)
 	print_state(1, phil);
 	sem_post(phil->waiter);
 	print_state(2, phil);
-	ft_sleep(phil->tt_eat);
 	phil->last_eat = ft_gettime();
+	ft_sleep(phil->tt_eat);
 	sem_post(phil->forks);
 	sem_post(phil->forks);
 }
@@ -57,8 +57,6 @@ void			*observation(void *info)
 {
 	size_t		now;
 	t_phil		*phil;
-	int			i;
-	int			flag;
 
 	phil = (t_phil*)info;
 	while (1)

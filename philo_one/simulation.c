@@ -6,15 +6,15 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/17 13:3 by1 elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/23 19:30:00 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	print_state(int type, t_phil *phil)
+void		print_state(int type, t_phil *phil)
 {
-	long int now;
+	size_t	now;
 
 	now = ft_gettime();
 	if (phil->data->someone_died)
@@ -31,7 +31,7 @@ void	print_state(int type, t_phil *phil)
 	pthread_mutex_unlock(phil->print);
 }
 
-void take_forks(t_phil *phil)
+void		take_forks(t_phil *phil)
 {
 	if (phil->data->someone_died)
 		return ;
@@ -52,15 +52,15 @@ void take_forks(t_phil *phil)
 	phil->last_eat = ft_gettime();
 }
 
-void ft_end(t_phil *phil)
+void		ft_end(t_phil *phil)
 {
 	pthread_mutex_unlock(phil->left_fork);
 	pthread_mutex_unlock(phil->right_fork);
 }
 
-void *simulation(void *data)
+void		*simulation(void *data)
 {
-	t_phil *phil;
+	t_phil	*phil;
 
 	phil = (t_phil*)data;
 	phil->start_time = ft_gettime();
