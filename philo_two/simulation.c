@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 17:34:31 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:58:41 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		print_state(int type, t_phil *phil)
 	size_t	now;
 
 	now = ft_gettime();
+	usleep(20);
 	if (*phil->someone_died)
 		return ;
 	sem_wait(phil->print);
@@ -37,6 +38,8 @@ void		waiter(t_phil *phil)
 		return ;
 	sem_wait(phil->waiter);
 	sem_wait(phil->forks);
+	if (*phil->someone_died)
+		return ;
 	print_state(1, phil);
 	if (phil->ph_num == 1)
 	{
@@ -58,7 +61,6 @@ void		*simulation(void *data)
 	t_phil	*phil;
 
 	phil = (t_phil*)data;
-	phil->start_time = ft_gettime();
 	phil->last_eat = phil->start_time;
 	while (phil->eat_count != 0)
 	{
@@ -71,6 +73,8 @@ void		*simulation(void *data)
 		if (*phil->someone_died)
 			break ;
 		ft_sleep(phil->tt_sleep);
+		if (*phil->someone_died)
+			break ;
 		print_state(4, phil);
 		if (phil->eat_count != -1)
 			phil->eat_count--;

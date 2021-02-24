@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 17:38:38 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 13:00:58 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	fill_each_phil(t_main *data, t_phil *phil, int i)
 	phil->tt_sleep = data->tt_sleep;
 	phil->tt_die = data->tt_die;
 	phil->ph_num = data->ph_num;
+	phil->start_time = data->start_time;
 }
 
 int		preparation(t_main *data)
@@ -42,6 +43,7 @@ int		preparation(t_main *data)
 		print_error("Error, sem_open function failed((");
 	if (!(data->print = sem_open("print", O_CREAT | O_EXCL, S_IRWXU, 1)))
 		print_error("Error, sem_open function failed((");
+	data->start_time = ft_gettime();
 	while (++i < data->ph_num)
 		fill_each_phil(data, data->arr_phil + i, i + 1);
 	if (!(data->phil_thr = (pthread_t *)malloc(sizeof(pthread_t) * \

@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 19:35:08 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 13:04:16 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	fill_each_phil(t_main *data, t_phil *phil, int i)
 	phil->tt_eat = data->tt_eat;
 	phil->tt_sleep = data->tt_sleep;
 	phil->tt_die = data->tt_die;
+	phil->start_time = data->start_time;
 }
 
 static void	open_semaphors(t_main *data)
@@ -74,6 +75,7 @@ int			preparation(t_main *data)
 	if (!(data->pids = (pid_t *)malloc(sizeof(pid_t) * ph_count)))
 		print_error("Sorry, memory allocation error((");
 	open_semaphors(data);
+	data->start_time = ft_gettime();
 	while (++i < ph_count)
 	{
 		fill_each_phil(data, data->arr_phil + i, i);

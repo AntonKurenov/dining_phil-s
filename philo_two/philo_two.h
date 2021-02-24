@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 17:02:45 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 13:00:28 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_main
 	size_t		tt_die;
 	size_t		tt_eat;
 	size_t		tt_sleep;
+	size_t		start_time;
 	int			eat_count;
 	int			finished;
 	pthread_t	*observer;

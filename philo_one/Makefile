@@ -1,8 +1,3 @@
-GREEN = \033[32m
-YELLOW = \033[0;33m
-NO_COLOR = \x1b[0m
-RED = \x1b[31;01m
-
 NAME = philo_one
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror

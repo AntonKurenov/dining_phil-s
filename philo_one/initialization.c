@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 11:32:57 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:45:19 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
+	phil->ph_num = data->ph_num;
 	phil->someone_died = &data->someone_died;
 	phil->finished = &data->finished;
 	phil->print = data->print;

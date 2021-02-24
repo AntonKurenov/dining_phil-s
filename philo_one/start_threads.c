@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:36:58 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 11:33:46 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 17:29:37 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void		*print_dead(t_main *data, size_t now, int i)
 	pthread_mutex_lock(data->print);
 	printf("%zu %d died\n", now - data->arr_phil[i].start_time,\
 			data->arr_phil[i].num);
+	ft_sleep(5);
+	pthread_mutex_unlock(data->print);
 	return (0);
 }
 
@@ -31,9 +33,9 @@ void		*observation(void *info)
 	data = (t_main*)info;
 	while (1)
 	{
-		i = -1;
+		i = 0;
 		flag = 0;
-		while (++i < data->ph_num)
+		while (++i <= data->ph_num)
 		{
 			now = ft_gettime();
 			if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
@@ -59,7 +61,7 @@ int			start_threads(t_main *data)
 			arr_phil + i)))
 			print_error("Failed to create thread!");
 	}
-	ft_sleep(50);
+	ft_sleep(5);
 	if (pthread_create(data->observer, NULL, observation, (void*)data))
 		print_error("Failed to create thread!");
 	i = 0;

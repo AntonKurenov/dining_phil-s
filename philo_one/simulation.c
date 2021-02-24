@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 12:03:02 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:56:02 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		print_state(int type, t_phil *phil)
 	size_t	now;
 
 	now = ft_gettime();
+	usleep(20);
 	if (*phil->someone_died)
 		return ;
 	pthread_mutex_lock(phil->print);
@@ -46,14 +47,17 @@ void		take_forks(t_phil *phil)
 	{
 		pthread_mutex_lock(phil->right_fork);
 		print_state(1, phil);
+		if (phil->ph_num == 1)
+		{
+			ft_sleep(phil->tt_die + 2);
+			return ;
+		}
 		pthread_mutex_lock(phil->left_fork);
 		print_state(1, phil);
 	}
 	phil->last_eat = ft_gettime();
 	print_state(2, phil);
 	ft_sleep(phil->tt_eat);
-	pthread_mutex_unlock(phil->right_fork);
-	pthread_mutex_unlock(phil->left_fork);
 }
 
 void		ft_end(t_phil *phil)
@@ -74,8 +78,8 @@ void		*simulation(void *data)
 		if (phil->eat_count == 0)
 			break ;
 		take_forks(phil);
-		if (*phil->someone_died)
-			break ;
+		pthread_mutex_unlock(phil->right_fork);
+		pthread_mutex_unlock(phil->left_fork);
 		if (*phil->someone_died)
 			break ;
 		print_state(3, phil);

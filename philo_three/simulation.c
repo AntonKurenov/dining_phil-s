@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 19:34:17 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 12:33:09 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void			*simulation(void *data)
 	pthread_t	obs;
 
 	phil = (t_phil*)data;
-	phil->start_time = ft_gettime();
 	phil->last_eat = phil->start_time;
 	if (pthread_create(&obs, NULL, observation, data))
 		print_error("Error: pthread_create function failed");
