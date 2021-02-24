@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 19:30:00 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 12:03:02 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		print_state(int type, t_phil *phil)
 	size_t	now;
 
 	now = ft_gettime();
-	if (phil->data->someone_died)
+	if (*phil->someone_died)
 		return ;
 	pthread_mutex_lock(phil->print);
 	if (type == 1)
@@ -33,7 +33,7 @@ void		print_state(int type, t_phil *phil)
 
 void		take_forks(t_phil *phil)
 {
-	if (phil->data->someone_died)
+	if (*phil->someone_died)
 		return ;
 	if ((phil->num & 0x1) == 0)
 	{
@@ -50,6 +50,10 @@ void		take_forks(t_phil *phil)
 		print_state(1, phil);
 	}
 	phil->last_eat = ft_gettime();
+	print_state(2, phil);
+	ft_sleep(phil->tt_eat);
+	pthread_mutex_unlock(phil->right_fork);
+	pthread_mutex_unlock(phil->left_fork);
 }
 
 void		ft_end(t_phil *phil)
@@ -69,19 +73,20 @@ void		*simulation(void *data)
 	{
 		if (phil->eat_count == 0)
 			break ;
-		if (phil->eat_count != -1)
-			phil->eat_count--;
 		take_forks(phil);
-		if (phil->data->someone_died)
+		if (*phil->someone_died)
 			break ;
-		print_state(2, phil);
-		ft_sleep(phil->tt_eat);
-		pthread_mutex_unlock(phil->right_fork);
-		pthread_mutex_unlock(phil->left_fork);
+		if (*phil->someone_died)
+			break ;
 		print_state(3, phil);
 		ft_sleep(phil->tt_sleep);
 		print_state(4, phil);
+		if (phil->eat_count == 0)
+			break ;
+		if (phil->eat_count != -1)
+			phil->eat_count--;
 	}
 	ft_end(phil);
+	*phil->finished += 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:36:58 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 19:32:49 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:33:46 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,22 @@ void		*observation(void *info)
 {
 	t_main	*data;
 	size_t	now;
-	int		i;
 	int		flag;
+	int		i;
 
 	data = (t_main*)info;
 	while (1)
 	{
-		i = 0;
+		i = -1;
 		flag = 0;
-		while (++i <= data->ph_num)
+		while (++i < data->ph_num)
 		{
 			now = ft_gettime();
-			if (data->arr_phil[i].eat_count == 0)
-				flag++;
-			if (flag == data->ph_num)
-				return (0);
-			else if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
+			if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
 				arr_phil[i].eat_count != 0)
 				return (print_dead(data, now, i));
+			if (data->finished == data->ph_num)
+				return (0);
 		}
 		ft_sleep(1);
 	}
@@ -54,6 +52,7 @@ int			start_threads(t_main *data)
 
 	i = 0;
 	data->someone_died = 0;
+	data->finished = 0;
 	while (++i <= data->ph_num)
 	{
 		if (pthread_create(data->phil_thr + i, NULL, simulation, (void*)(data->\

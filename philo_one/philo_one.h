@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/23 19:21:31 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 11:30:37 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,12 @@
 typedef pthread_mutex_t	t_mutex;
 typedef struct timeval	t_time;
 
-struct s_main;
-
 typedef struct		s_phil
 {
-	struct s_main	*data;
-	size_t			start_life;
-	size_t			time_death;
+	int				*someone_died;
+	int				*finished;
 	size_t			start_time;
 	size_t			last_eat;
-	size_t			time_diff;
-	size_t			time_of_death;
-	int				is_dead;
 	t_mutex			*left_fork;
 	t_mutex			*right_fork;
 	t_mutex			*print;
@@ -58,6 +52,7 @@ typedef struct		s_main
 	t_mutex			*print;
 	t_phil			*arr_phil;
 	int				someone_died;
+	int				finished;
 }					t_main;
 
 void				ft_sleep(size_t time);
