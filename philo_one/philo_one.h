@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 11:30:37 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/28 16:24:34 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_phil
 {
 	int				*someone_died;
 	int				*finished;
+	int				ended;
 	size_t			start_time;
 	size_t			last_eat;
 	t_mutex			*left_fork;
@@ -33,9 +34,9 @@ typedef struct		s_phil
 	t_mutex			*print;
 	int				ph_num;
 	int				num;
-	int				tt_die;
-	int				tt_eat;
-	int				tt_sleep;
+	size_t			tt_die;
+	size_t			tt_eat;
+	size_t			tt_sleep;
 	int				eat_count;
 }					t_phil;
 
@@ -45,8 +46,11 @@ typedef struct		s_main
 	size_t			tt_die;
 	size_t			tt_eat;
 	size_t			tt_sleep;
+	size_t			start_time;
 	int				eat_count;
+	int				everyone_done;
 	pthread_t		*observer;
+	pthread_t		*eat_observ;
 	pthread_t		*phil_thr;
 	t_mutex			*forks;
 	t_mutex			*print;

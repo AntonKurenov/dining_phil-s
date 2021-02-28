@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 15:58:41 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:58:41by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		print_state(int type, t_phil *phil)
 {
 	size_t	now;
 
-	now = ft_gettime();
 	usleep(20);
+	now = ft_gettime();
 	if (*phil->someone_died)
 		return ;
 	sem_wait(phil->print);
@@ -38,8 +38,6 @@ void		waiter(t_phil *phil)
 		return ;
 	sem_wait(phil->waiter);
 	sem_wait(phil->forks);
-	if (*phil->someone_died)
-		return ;
 	print_state(1, phil);
 	if (phil->ph_num == 1)
 	{
@@ -64,23 +62,21 @@ void		*simulation(void *data)
 	phil->last_eat = phil->start_time;
 	while (phil->eat_count != 0)
 	{
-		if (*phil->someone_died)
-			break ;
+		// if (phil->eat_count == 0)
+		// 	break ;
 		waiter(phil);
-		if (*phil->someone_died)
-			break ;
 		print_state(3, phil);
 		if (*phil->someone_died)
 			break ;
 		ft_sleep(phil->tt_sleep);
-		if (*phil->someone_died)
-			break ;
 		print_state(4, phil);
-		if (phil->eat_count != -1)
-			phil->eat_count--;
 		if (phil->eat_count == 0)
 			break ;
+		if (phil->eat_count != -1)
+			phil->eat_count--;
 	}
+	printf("phil_num is %d\n", phil->num);
+	phil->end_sim = 1;
 	*phil->finished += 1;
 	return (0);
 }

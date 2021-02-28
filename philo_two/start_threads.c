@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:36:58 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 15:28:41 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/25 16:38:50 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		*print_dead(t_main *data, size_t now, int i)
 {
-	sem_wait(data->print);
 	data->someone_died = 1;
+	sem_wait(data->print);
 	printf("%zu %d died\n", now - data->arr_phil[i].start_time,\
 			data->arr_phil[i].num);
 	return (0);
@@ -37,10 +37,15 @@ void		*observation(void *info)
 		{
 			now = ft_gettime();
 			if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
-				arr_phil[i].eat_count != 0)
+				arr_phil[i].end_sim == 0)
+			// if (now - data->arr_phil[i].last_eat > data->tt_die && data->\
+			// 	arr_phil[i].eat_count != 0)
 				return (print_dead(data, now, i));
 			if (data->finished == data->ph_num)
+			{
+				printf("inside if\n");
 				return (0);
+			}
 		}
 		ft_sleep(1);
 	}

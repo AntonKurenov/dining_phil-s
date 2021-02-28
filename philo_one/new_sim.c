@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simulation.c                                       :+:      :+:    :+:   */
+/*   new_sim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/28 20:31:11 by elovegoo         ###   ########.fr       */
+/*   Created: 2021/02/28 12:24:55 by elovegoo          #+#    #+#             */
+/*   Updated: 2021/02/28 15:36:50 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,60 @@ void		ft_end(t_phil *phil)
 	pthread_mutex_unlock(phil->right_fork);
 }
 
+void *new_print_dead(t_phil *phil, size_t now, int i)
+{
+	*phil->someone_died = 1;
+	pthread_mutex_lock(phil->print);
+	printf("%zu %d died\n", now - phil->start_time, i);
+	ft_sleep(30);
+	pthread_mutex_unlock(phil->print);
+	return (0);
+}
+
+void		*observ_2(void *data)
+{
+	t_phil *phil;
+	size_t now;
+	int		is_dead;
+
+	phil = (t_phil*)data;
+	is_dead = 0;
+	printf("hello\n");
+	while (!is_dead)
+	{
+		now = ft_gettime();
+		if (now - phil->last_eat > phil->tt_die)
+		{
+			if (*phil->finished == phil->ph_num)
+				return (0);
+			// if (phil->ended == 1 && *phil->finished == phil->ph_num)
+			// 	return (0);
+			if (*phil->someone_died == 1)
+				return (0);
+			*phil->someone_died = 1;
+			return (new_print_dead(phil, now, phil->num));
+		}
+		if (phil->ended == 1)
+			return (0);
+		ft_sleep(1);
+	}
+	return (0);
+}
+
 void		*simulation(void *data)
 {
 	t_phil	*phil;
+	pthread_t obs;
 
 	phil = (t_phil*)data;
 	phil->last_eat = phil->start_time;
+	if (pthread_create(&obs, NULL, observ_2, (void*)phil))
+		print_error("Failed to create thread!");
+	pthread_detach(obs);
 	while (1)
 	{
 		if (phil->eat_count == 0)
-			ft_sleep(phil->tt_die);
+			break ;
 		take_forks(phil);
 		if (phil->eat_count != -1)
 			phil->eat_count--;
@@ -87,10 +131,10 @@ void		*simulation(void *data)
 		ft_sleep(phil->tt_sleep);
 		print_state(4, phil);
 		if (phil->eat_count == 0)
-			ft_sleep(phil->tt_die);
+			break ;
 	}
 	ft_end(phil);
-	// *phil->finished += 1;
+	*phil->finished += 1;
 	phil->ended = 1;
 	return (0);
 }

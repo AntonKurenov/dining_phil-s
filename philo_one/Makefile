@@ -2,9 +2,10 @@ NAME = philo_one
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = philo_one.c \
-		simulation.c utils.c \
+SRCS = philo_one.c utils.c \
 		initialization.c start_threads.c \
+		simulation.c
+		# new_sim.c
 
 all: $(NAME)
 

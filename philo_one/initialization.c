@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/24 16:45:19 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/02/28 16:17:31 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
+	phil->start_time = data->start_time;
+	phil->ended = 0;
 	phil->ph_num = data->ph_num;
 	phil->someone_died = &data->someone_died;
 	phil->finished = &data->finished;
@@ -51,12 +53,14 @@ int		preparation(t_main *data)
 		print_error("Sorry, memory allocation error((");
 	if (!(data->print = (t_mutex *)malloc(sizeof(t_mutex))))
 		print_error("Sorry, memory allocation error((");
+	data->start_time = ft_gettime();
 	while (++i <= data->ph_num)
 	{
 		fill_each_phil(data, data->arr_phil + i, i);
 	}
-	if (!(data->phil_thr = (pthread_t *)malloc(sizeof(pthread_t) * count)))
+	if (!(data->phil_thr = (pthread_t*)malloc(sizeof(pthread_t) * (count + 1))))
 		print_error("Sorry, memory allocation error((");
 	data->observer = data->phil_thr + data->ph_num;
+	data->eat_observ = data->phil_thr + data->ph_num + 1;
 	return (0);
 }
