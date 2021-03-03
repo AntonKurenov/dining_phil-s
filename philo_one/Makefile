@@ -5,7 +5,6 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = philo_one.c utils.c \
 		initialization.c start_threads.c \
 		simulation.c
-		# new_sim.c
 
 all: $(NAME)
 

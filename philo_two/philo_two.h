@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/25 16:36:37 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 14:05:06 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_phil
 	int			eat_count;
 	int			*someone_died;
 	int			*finished;
+	int			ended;
 	int			end_sim;
 	int			ph_num;
 }				t_phil;
@@ -49,7 +50,6 @@ typedef struct	s_main
 	size_t		start_time;
 	int			eat_count;
 	int			finished;
-	pthread_t	*observer;
 	pthread_t	*phil_thr;
 	sem_t		*forks;
 	sem_t		*print;

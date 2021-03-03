@@ -6,14 +6,16 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/25 16:38:15 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 14:04:56 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-void	fill_each_phil(t_main *data, t_phil *phil, int i)
+static	void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
+	phil->start_time = data->start_time;
+	phil->ended = 0;
 	phil->end_sim = 0;
 	phil->someone_died = &data->someone_died;
 	phil->finished = &data->finished;
@@ -26,13 +28,12 @@ void	fill_each_phil(t_main *data, t_phil *phil, int i)
 	phil->tt_sleep = data->tt_sleep;
 	phil->tt_die = data->tt_die;
 	phil->ph_num = data->ph_num;
-	phil->start_time = data->start_time;
 }
 
-int		preparation(t_main *data)
+int				preparation(t_main *data)
 {
-	int	i;
-	int	ph_count;
+	int			i;
+	int			ph_count;
 
 	i = -1;
 	ph_count = data->ph_num;
@@ -50,6 +51,5 @@ int		preparation(t_main *data)
 	if (!(data->phil_thr = (pthread_t *)malloc(sizeof(pthread_t) * \
 			(ph_count + 1))))
 		print_error("Sorry, memory allocation error((");
-	data->observer = data->phil_thr + data->ph_num;
 	return (0);
 }

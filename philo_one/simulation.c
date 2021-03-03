@@ -6,13 +6,13 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 12:33:33 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/28 20:31:11 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 12:47:27 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void		print_state(int type, t_phil *phil)
+static	void		print_state(int type, t_phil *phil)
 {
 	size_t	now;
 
@@ -32,7 +32,7 @@ void		print_state(int type, t_phil *phil)
 	pthread_mutex_unlock(phil->print);
 }
 
-void		take_forks(t_phil *phil)
+static	void		take_forks(t_phil *phil)
 {
 	if (*phil->someone_died)
 		return ;
@@ -60,37 +60,29 @@ void		take_forks(t_phil *phil)
 	ft_sleep(phil->tt_eat);
 }
 
-void		ft_end(t_phil *phil)
+void				*simulation(void *data)
 {
-	pthread_mutex_unlock(phil->left_fork);
-	pthread_mutex_unlock(phil->right_fork);
-}
-
-void		*simulation(void *data)
-{
-	t_phil	*phil;
+	t_phil			*phil;
 
 	phil = (t_phil*)data;
 	phil->last_eat = phil->start_time;
 	while (1)
 	{
 		if (phil->eat_count == 0)
-			ft_sleep(phil->tt_die);
+		{
+			*phil->finished += 1;
+			phil->ended = 1;
+			while (1)
+				ft_sleep(100);
+		}
 		take_forks(phil);
 		if (phil->eat_count != -1)
 			phil->eat_count--;
 		pthread_mutex_unlock(phil->right_fork);
 		pthread_mutex_unlock(phil->left_fork);
-		if (*phil->someone_died)
-			break ;
 		print_state(3, phil);
 		ft_sleep(phil->tt_sleep);
 		print_state(4, phil);
-		if (phil->eat_count == 0)
-			ft_sleep(phil->tt_die);
 	}
-	ft_end(phil);
-	// *phil->finished += 1;
-	phil->ended = 1;
 	return (0);
 }

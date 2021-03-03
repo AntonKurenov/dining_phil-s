@@ -6,7 +6,7 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:28:57 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/28 16:24:34 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 14:05:14 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ typedef struct		s_main
 	size_t			tt_sleep;
 	size_t			start_time;
 	int				eat_count;
-	int				everyone_done;
-	pthread_t		*observer;
-	pthread_t		*eat_observ;
 	pthread_t		*phil_thr;
 	t_mutex			*forks;
 	t_mutex			*print;
@@ -68,6 +65,5 @@ void				print_error(char *str);
 size_t				ft_gettime(void);
 int					start(t_main *data);
 int					start_threads(t_main *data);
-void				print_state(int type, t_phil *phil);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 10:20:45 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/25 15:09:09 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 16:36:24 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int			check_input(int argc, char **argv, t_main *data)
+static	int		check_input(int argc, char **argv, t_main *data)
 {
 	if (argc == 6)
 	{
@@ -34,25 +34,9 @@ int			check_input(int argc, char **argv, t_main *data)
 	return (0);
 }
 
-void		ft_free(t_main *data)
+int				main(int argc, char **argv)
 {
-	sem_post(data->print);
-	if (sem_close(data->forks) != 0)
-		print_error("Error: sem_close returned an error");
-	if (sem_close(data->waiter) != 0)
-		print_error("Error: sem_close returned an error");
-	if (sem_close(data->print) != 0)
-		print_error("Error: sem_close returned an error");
-	sem_unlink("forks");
-	sem_unlink("waiter");
-	sem_unlink("print");
-	free(data->arr_phil);
-	free(data->phil_thr);
-}
-
-int			main(int argc, char **argv)
-{
-	t_main	data;
+	t_main		data;
 
 	if (argc < 5 || argc > 6)
 		print_error("Error: Invalid input");
@@ -62,6 +46,10 @@ int			main(int argc, char **argv)
 	sem_unlink("print");
 	preparation(&data);
 	start_threads(&data);
-	ft_free(&data);
+	sem_unlink("forks");
+	sem_unlink("waiter");
+	sem_unlink("print");
+	free(data.arr_phil);
+	free(data.phil_thr);
 	return (0);
 }

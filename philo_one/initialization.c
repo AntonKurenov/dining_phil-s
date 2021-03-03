@@ -6,13 +6,13 @@
 /*   By: elovegoo <elovegoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 10:37:50 by elovegoo          #+#    #+#             */
-/*   Updated: 2021/02/28 16:17:31 by elovegoo         ###   ########.fr       */
+/*   Updated: 2021/03/03 15:31:26 by elovegoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	fill_each_phil(t_main *data, t_phil *phil, int i)
+static	void	fill_each_phil(t_main *data, t_phil *phil, int i)
 {
 	phil->start_time = data->start_time;
 	phil->ended = 0;
@@ -40,10 +40,10 @@ void	fill_each_phil(t_main *data, t_phil *phil, int i)
 		print_error("Failed to initialize mutex");
 }
 
-int		preparation(t_main *data)
+int				preparation(t_main *data)
 {
-	int	i;
-	int	count;
+	int			i;
+	int			count;
 
 	i = 0;
 	count = data->ph_num + 1;
@@ -60,7 +60,5 @@ int		preparation(t_main *data)
 	}
 	if (!(data->phil_thr = (pthread_t*)malloc(sizeof(pthread_t) * (count + 1))))
 		print_error("Sorry, memory allocation error((");
-	data->observer = data->phil_thr + data->ph_num;
-	data->eat_observ = data->phil_thr + data->ph_num + 1;
 	return (0);
 }
